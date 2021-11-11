@@ -1,7 +1,7 @@
 
 #define relaypin 0
 #define phonepin 3
-int active_timers;
+int active_timers; //if >0, timers are checked in chck_times()
 
 char printerOn(char On)
 {
@@ -11,8 +11,8 @@ char printerOn(char On)
     else {return 't';}
    }
 
-  if (On == 'f') {debugI("* OFF button pressed");} //debug
-  if (On == 't') {debugI("* On button pressed");} //debug
+  if (On == 'f') {debugI("* fx_handlers/ relay triggered OFF");} //debug
+  if (On == 't') {debugI("* fx_handlers/ relay triggered ON");} //debug
   
   if (On == 'f') {Serial.println("Printer Off"); digitalWrite(relaypin, HIGH); return 'f';}
   if (On == 't') {Serial.println("Printer On"); digitalWrite(relaypin, LOW); return 't';}

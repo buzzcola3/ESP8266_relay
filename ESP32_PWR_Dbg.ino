@@ -23,7 +23,7 @@ const char* ssid = "BetakNET5"; // fill in here your router or wifi SSID
 const char* password = "Marian228"; // fill in here your router or wifi password
 const byte bssid[]={0x50, 0xd2, 0xf5, 0x4e, 0x52, 0xe5}; //MAC adress of target AP
 
-AsyncWebServer userver(8266);
+
 
 void setup()
 {

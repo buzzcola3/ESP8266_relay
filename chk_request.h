@@ -8,32 +8,28 @@ if (active_timers != 0){chck_times();}
   
   if (header.indexOf("/RELAY=OFF") != -1)  
   {
+    debugI("* chk_request/ OFF button pressed"); //debug
     printerOn('f');
-     client.print("<HEAD>");
-     client.print("<meta http-equiv=\"refresh" content=\"0;url=/\">");
-     client.print("</head>");
+    
     return;
   }
   
   if (header.indexOf("/RELAY=ON") != -1)  
   {
+    debugI("* chk_request/ ON button pressed"); //debug
     printerOn('t');
-     client.print("<HEAD>");
-     client.print("<meta http-equiv=\"refresh" content=\"0;url=/\">");
-     client.print("</head>");
+    
     return;
   }
 
     if (header.indexOf("/phoneon") != -1)  
   {
     Serial.println("Phone should be turning on");
+    debugI("* chk_request/ Phone power button pressed"); //debug
     
-     client.print("<HEAD>");
-     client.print("<meta http-equiv=\"refresh" content=\"0;url=/\">");
-     client.print("</head>");
     phonepw('p');
   }
-            
+   Debug.handle(); //debug
   return;
 
 }

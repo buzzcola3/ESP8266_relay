@@ -4,13 +4,14 @@
 
 
 WiFiServer server(80);
+AsyncWebServer userver(8266);
 
 unsigned long currentTime = millis();
 unsigned long previousTime = 0;
 const long timeoutTime = 2000;
 
 String header;
-
+#include "chk_request.h"
 void webserver()
   {
     WiFiClient client = server.available();
@@ -31,21 +32,7 @@ void webserver()
           // that's the end of the client HTTP request, so send a response:
           if (currentLine.length() == 0) {
 
-  if (header.indexOf("/RELAY=OFF") != -1)  
-  {
-    printerOn('f');
-  }
-  
-  if (header.indexOf("/RELAY=ON") != -1)  
-  {
-    printerOn('t');
-  }
-
-    if (header.indexOf("/phoneon") != -1)  
-  {
-    Serial.println("Phone should be turning on");
-    phonepw('p');
-  }      
+            chk_rq();
   
             client.println("<!DOCTYPE html><html>");
             client.println("<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">");
@@ -71,6 +58,7 @@ void webserver()
             
             if (printerOn('?') == 't' && phonepw('?') == 't'){client.println("Phone should now be On<br>");} else {client.println((powerbutton_timer + 7000) - millis());}
             client.println("</body></html>");
+
 
             } else { // if you got a newline, then clear currentLine
             currentLine = "";
